@@ -42,6 +42,17 @@ export function Header() {
   const isActive = (path: string) => pathname === path;
 
   useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
@@ -534,6 +545,26 @@ function ResourcesDropdown({ pathname }: { pathname: string }) {
   );
 }
 
+/* ─── Color map (static strings so Tailwind can detect them at build time) ─── */
+
+const colorMap: Record<
+  string,
+  { bg: string; text: string; hover: string; gradientFrom: string; border: string }
+> = {
+  blue:    { bg: "bg-blue-500/20",    text: "text-blue-400",    hover: "group-hover/item:text-blue-300",    gradientFrom: "from-blue-500/10",    border: "border-blue-500/20" },
+  indigo:  { bg: "bg-indigo-500/20",  text: "text-indigo-400",  hover: "group-hover/item:text-indigo-300",  gradientFrom: "from-indigo-500/10",  border: "border-indigo-500/20" },
+  rose:    { bg: "bg-rose-500/20",    text: "text-rose-400",    hover: "group-hover/item:text-rose-300",    gradientFrom: "from-rose-500/10",    border: "border-rose-500/20" },
+  emerald: { bg: "bg-emerald-500/20", text: "text-emerald-400", hover: "group-hover/item:text-emerald-300", gradientFrom: "from-emerald-500/10", border: "border-emerald-500/20" },
+  amber:   { bg: "bg-amber-500/20",   text: "text-amber-400",   hover: "group-hover/item:text-amber-300",   gradientFrom: "from-amber-500/10",   border: "border-amber-500/20" },
+  purple:  { bg: "bg-purple-500/20",  text: "text-purple-400",  hover: "group-hover/item:text-purple-300",  gradientFrom: "from-purple-500/10",  border: "border-purple-500/20" },
+  orange:  { bg: "bg-orange-500/20",  text: "text-orange-400",  hover: "group-hover/item:text-orange-300",  gradientFrom: "from-orange-500/10",  border: "border-orange-500/20" },
+  cyan:    { bg: "bg-cyan-500/20",    text: "text-cyan-400",    hover: "group-hover/item:text-cyan-300",    gradientFrom: "from-cyan-500/10",    border: "border-cyan-500/20" },
+  green:   { bg: "bg-green-500/20",   text: "text-green-400",   hover: "group-hover/item:text-green-300",   gradientFrom: "from-green-500/10",   border: "border-green-500/20" },
+  yellow:  { bg: "bg-yellow-500/20",  text: "text-yellow-400",  hover: "group-hover/item:text-yellow-300",  gradientFrom: "from-yellow-500/10",  border: "border-yellow-500/20" },
+  gray:    { bg: "bg-gray-500/20",    text: "text-gray-400",    hover: "group-hover/item:text-gray-300",    gradientFrom: "from-gray-500/10",    border: "border-gray-500/20" },
+  pink:    { bg: "bg-pink-500/20",    text: "text-pink-400",    hover: "group-hover/item:text-pink-300",    gradientFrom: "from-pink-500/10",    border: "border-pink-500/20" },
+};
+
 /* ─── Shared dropdown link components ─── */
 
 function DropdownLink({
@@ -555,7 +586,7 @@ function DropdownLink({
       className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors group/item"
     >
       <div
-        className={`bg-${color}-500/20 p-2 rounded-lg text-${color}-400 group-hover/item:text-${color}-300 transition-colors`}
+        className={`${colorMap[color].bg} p-2 rounded-lg ${colorMap[color].text} ${colorMap[color].hover} transition-colors`}
       >
         <Icon className="h-5 w-5" />
       </div>
@@ -586,7 +617,7 @@ function DropdownLinkSmall({
       className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item"
     >
       <div
-        className={`bg-${color}-500/20 p-2 rounded-lg text-${color}-400 group-hover/item:text-${color}-300 transition-colors`}
+        className={`${colorMap[color].bg} p-2 rounded-lg ${colorMap[color].text} ${colorMap[color].hover} transition-colors`}
       >
         <Icon className="h-4 w-4" />
       </div>
@@ -614,10 +645,10 @@ function FeaturedLink({
   return (
     <Link
       href={href}
-      className={`flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item col-span-2 bg-gradient-to-r from-${color}-500/10 to-transparent border border-${color}-500/20`}
+      className={`flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group/item col-span-2 bg-gradient-to-r ${colorMap[color].gradientFrom} to-transparent border ${colorMap[color].border}`}
     >
       <div
-        className={`bg-${color}-500/20 p-2 rounded-lg text-${color}-400 group-hover/item:text-${color}-300 transition-colors`}
+        className={`${colorMap[color].bg} p-2 rounded-lg ${colorMap[color].text} ${colorMap[color].hover} transition-colors`}
       >
         <Icon className="h-4 w-4" />
       </div>
@@ -751,7 +782,7 @@ function MobileLink({
       className="flex items-center gap-3 py-2 text-sm font-medium text-gray-300 hover:text-white"
       onClick={onClick}
     >
-      <Icon className={`h-4 w-4 text-${color}-400`} />
+      <Icon className={`h-4 w-4 ${colorMap[color].text}`} />
       {children}
     </Link>
   );
