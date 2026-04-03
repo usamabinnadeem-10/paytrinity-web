@@ -96,12 +96,12 @@ export default function F1VisaStrategyPakistanPage() {
           author: {
             "@type": "Organization",
             name: "PayTrinity",
-            url: "https://paytrinity.com",
+            url: "https://paytrinity.co",
           },
           publisher: {
             "@type": "Organization",
             name: "PayTrinity",
-            url: "https://paytrinity.com",
+            url: "https://paytrinity.co",
           },
           datePublished: "2025-01-15",
           description:

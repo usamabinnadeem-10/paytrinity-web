@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const data = contactSchema.parse(body);
 
-    const contactEmail = process.env.CONTACT_EMAIL ?? "owner@paytrinity.com";
+    const contactEmail = process.env.CONTACT_EMAIL ?? "hello@paytrinity.co";
 
     await resend.emails.send({
       from: "PayTrinity Contact <onboarding@resend.dev>",

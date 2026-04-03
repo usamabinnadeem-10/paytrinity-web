@@ -242,10 +242,10 @@ export function KYCAMLPolicyContent() {
                   If you have questions regarding our KYC/AML Policy, please
                   contact our compliance team at{" "}
                   <a
-                    href="mailto:compliance@paytrinity.co"
+                    href="mailto:hello@paytrinity.co"
                     className="text-cyan-400 hover:text-cyan-300 transition-colors"
                   >
-                    compliance@paytrinity.co
+                    hello@paytrinity.co
                   </a>
                   .
                 </p>

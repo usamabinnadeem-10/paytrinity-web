@@ -32,7 +32,7 @@ export default function BusinessRegulationFederalSystemsPage() {
           publisher: {
             "@type": "Organization",
             name: "PayTrinity",
-            url: "https://paytrinity.com",
+            url: "https://paytrinity.co",
           },
           description:
             "An in-depth analysis of multi-jurisdictional compliance frameworks, regulatory fragmentation, and strategic approaches to navigating federal business regulation systems.",

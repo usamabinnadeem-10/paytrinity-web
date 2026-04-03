@@ -43,7 +43,7 @@ const sections = [
   {
     title: "8. Contact Us",
     content:
-      "If you have any questions about these Terms, please contact us at support@paytrinity.co.",
+      "If you have any questions about these Terms, please contact us at hello@paytrinity.co.",
   },
 ];
 

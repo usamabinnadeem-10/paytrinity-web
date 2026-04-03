@@ -11,13 +11,13 @@ export function generateBreadcrumbs(
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://paytrinity.com",
+        item: "https://paytrinity.co",
       },
       ...segments.map((segment, i) => ({
         "@type": "ListItem",
         position: i + 2,
         name: labels[segment] ?? segment,
-        item: `https://paytrinity.com/${segments.slice(0, i + 1).join("/")}`,
+        item: `https://paytrinity.co/${segments.slice(0, i + 1).join("/")}`,
       })),
     ],
   };

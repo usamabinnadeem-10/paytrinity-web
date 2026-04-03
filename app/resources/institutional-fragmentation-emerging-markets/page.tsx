@@ -32,7 +32,7 @@ export default function InstitutionalFragmentationEmergingMarketsPage() {
           publisher: {
             "@type": "Organization",
             name: "PayTrinity",
-            url: "https://paytrinity.com",
+            url: "https://paytrinity.co",
           },
           description:
             "Analysis of regulatory complexity, institutional coordination challenges, and strategic approaches for businesses operating in emerging market economies.",

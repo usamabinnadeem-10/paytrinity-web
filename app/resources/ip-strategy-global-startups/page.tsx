@@ -31,7 +31,7 @@ export default function IPStrategyGlobalStartupsPage() {
           publisher: {
             "@type": "Organization",
             name: "PayTrinity",
-            url: "https://paytrinity.com",
+            url: "https://paytrinity.co",
           },
           description:
             "Comprehensive guide to intellectual property strategy for startups operating across borders, covering patents, trademarks, and international IP protection frameworks.",

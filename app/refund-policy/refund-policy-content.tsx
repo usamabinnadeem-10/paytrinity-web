@@ -134,7 +134,7 @@ export function RefundPolicyContent() {
                 </h2>
                 <p className="text-gray-400 leading-relaxed">
                   To request a refund, please contact our support team at
-                  support@paytrinity.co with your order details and the reason
+                  hello@paytrinity.co with your order details and the reason
                   for the request. We will review your request and notify you of
                   the approval or rejection of your refund within 5-7 business
                   days.
