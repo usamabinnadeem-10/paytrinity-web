@@ -5,6 +5,10 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
+import { draftMode } from "next/headers";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { SanityLive } from "@/sanity/lib/live";
+import { DisableDraftMode } from "@/components/disable-draft-mode";
 import "../globals.css";
 
 const inter = Inter({
@@ -34,7 +38,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function AppLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -77,6 +81,13 @@ export default function RootLayout({
             },
           }}
         />
+        <SanityLive />
+        {(await draftMode()).isEnabled && (
+          <>
+            <VisualEditing />
+            <DisableDraftMode />
+          </>
+        )}
       </body>
     </html>
   );
