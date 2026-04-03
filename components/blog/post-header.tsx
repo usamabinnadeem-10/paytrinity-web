@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { formatDate } from "@/lib/blog"
 
 interface PostHeaderProps {
   title: string
@@ -7,14 +8,6 @@ interface PostHeaderProps {
   updatedAt?: string | null
   tags: string[] | null
   author: string
-}
-
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
 }
 
 export function PostHeader({

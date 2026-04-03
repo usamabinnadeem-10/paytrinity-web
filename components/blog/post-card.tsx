@@ -1,13 +1,5 @@
 import Link from "next/link"
-import type { PostListItem } from "@/lib/blog"
-
-function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
-}
+import { formatDate, type PostListItem } from "@/lib/blog"
 
 export function PostCard({ post }: { post: PostListItem }) {
   return (
