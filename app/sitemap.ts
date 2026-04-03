@@ -1,11 +1,13 @@
-import type { MetadataRoute } from "next";
+import type { MetadataRoute } from "next"
+import { ALL_POSTS_QUERY, type PostListItem } from "@/lib/blog"
+import { sanityFetch } from "@/sanity/lib/live"
 
-const BASE_URL = "https://paytrinity.co";
+const BASE_URL = "https://paytrinity.co"
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = "2026-04-03";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const lastModified = "2026-04-03"
 
-  return [
+  const staticEntries: MetadataRoute.Sitemap = [
     // Core pages
     { url: BASE_URL, lastModified, changeFrequency: "weekly", priority: 1 },
     { url: `${BASE_URL}/about`, lastModified, changeFrequency: "monthly", priority: 0.8 },
@@ -13,6 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/contact`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/faq`, lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/testimonials`, lastModified, changeFrequency: "monthly", priority: 0.6 },
+
+    // Blog listing
+    { url: `${BASE_URL}/blog`, lastModified: new Date().toISOString(), changeFrequency: "weekly", priority: 0.8 },
 
     // Products
     { url: `${BASE_URL}/products/start`, lastModified, changeFrequency: "monthly", priority: 0.8 },
@@ -69,5 +74,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/refund-policy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE_URL}/kyc-aml-policy`, lastModified, changeFrequency: "yearly", priority: 0.3 },
     { url: `${BASE_URL}/disclaimer`, lastModified, changeFrequency: "yearly", priority: 0.3 },
-  ];
+  ]
+
+  // Dynamic blog entries from Sanity
+  const { data: posts } = await sanityFetch({
+    query: ALL_POSTS_QUERY,
+    perspective: "published",
+    stega: false,
+  })
+
+  const blogEntries: MetadataRoute.Sitemap = (posts as PostListItem[]).map(
+    (post) => ({
+      url: `${BASE_URL}/blog/${post.slug}`,
+      lastModified: post.updatedAt ?? post.publishedAt,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }),
+  )
+
+  return [...staticEntries, ...blogEntries]
 }
