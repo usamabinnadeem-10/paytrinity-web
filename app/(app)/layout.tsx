@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { CookieBanner } from "@/components/CookieBanner";
+import { FacebookPixel } from "@/components/FacebookPixel";
 import { JsonLd } from "@/components/JsonLd";
 import { draftMode } from "next/headers";
 import { VisualEditing } from "next-sanity/visual-editing";
@@ -71,6 +72,7 @@ export default async function AppLayout({
         <div className="flex flex-1 flex-col">{children}</div>
         <Footer />
         <CookieBanner />
+        <FacebookPixel />
         <Toaster
           position="bottom-right"
           toastOptions={{
